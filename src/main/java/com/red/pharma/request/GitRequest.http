@@ -1,0 +1,1 @@
+GET http://localhost:8080/api/getRepos?q=created:2019-01-10&sort=stars&order=desc&page=1&per_page=50

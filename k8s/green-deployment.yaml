@@ -1,0 +1,52 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: charge-details-service
+  labels:
+    app: charge-details-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: charge-details-service
+  template:
+    metadata:
+      labels:
+        app: charge-details-service
+    spec:
+      containers:
+        - name: charge-details-service #image registry value
+          image: charge-details-service
+          imagePullPolicy: Never
+          env:
+            - name: DB_HOST
+              value: db-prod
+            - name: DB_USER
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: database.user
+            - name: DP_PASSWORD
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: database.pass
+            - name: API_KEY
+              valueFrom:
+                secretKeyRef:
+                  name: secrets
+                  key: api_key
+          ports:
+            - name: http
+              containerPort: 8080
+              readinessProbe:
+                httpGet:
+                  path: /actuator/health
+                  port: 8080
+                livenessProbe:
+                  httpGet:
+                    path: /actuator/health
+                    port: 8080
+                  initialDelaySeconds: 30
+                  periodSeconds: 10
+                  timeoutSeconds: 5

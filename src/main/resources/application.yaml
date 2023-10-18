@@ -1,0 +1,37 @@
+spring:
+  profiles:
+    active: dev
+  sleuth:
+    propagation:
+      type: B3
+      tag:
+        enabled: true
+    sampler:
+      percentage: '1.0'
+    web:
+      skipPattern: (^cleanup.*)
+  zipkin:
+    base-url: http://localhost:9411/
+    sender:
+      type: web
+    enabled: true
+management:
+  endpoint:
+    shutdown:
+      enabled: true
+    web:
+      exposure:
+        include: httptrace
+  metrics:
+    distribution:
+      percentiles-histogram:
+        http:
+          server:
+            requests: true
+  tracing:
+    sampling:
+      probability: 1.0
+
+logging:
+  pattern:
+    level: "%5p [${spring.application.name:}, %X{Slf4jMDCFilter.UUID}, %X{Slf4jMDCFilter.ClientIP}, %X{spanId:-}]"

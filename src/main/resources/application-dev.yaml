@@ -1,0 +1,23 @@
+server:
+  port: 8082
+
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "*"
+  endpoint:
+    health:
+      show-details: ALWAYS
+
+spring:
+  application:
+    name: 'redpharma-repository-service-dev'
+
+red:
+  openapi:
+    dev-url: http://localhost:8082
+    prod-url: http://localhost:8082
+  github_url: https://api.github.com/search/repositories
+
+api_key: b36c0f67-a54e-40e6-b4f6-c3982b1b5075 # replace with application key as per readme.dm
