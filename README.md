@@ -135,8 +135,9 @@ Update loki url in logback-spring to production url
 
 ## Exception handling
 
-  I have added custom exceptions that get thrown in different stages in the life cycle of a request, these exceptions are then centrally handled by the base controller exception handler method and converted into a format that the frontend would easily consume.
-  Observability, tracing and logging
+  I have added custom exceptions that get thrown in different stages in the life cycle of a request, these exceptions are then centrally handled by the base controller exception handler method and converted into a format that the frontend would easily consume. 
+  
+## Observability, tracing and logging
 
   I have implemented the following
   
